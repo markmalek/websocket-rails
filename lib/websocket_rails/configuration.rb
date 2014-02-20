@@ -25,6 +25,15 @@ module WebsocketRails
       @keep_subscribers_when_private = value
     end
 
+    def allowed_origins
+      # allows the value to be string or array
+      [@allowed_origins].flatten.compact.uniq ||= []
+    end
+
+    def allowed_origins=(value)
+      @allowed_origins = value
+    end
+
     def broadcast_subscriber_events?
       @broadcast_subscriber_events ||= false
     end
@@ -81,6 +90,14 @@ module WebsocketRails
       @log_internal_events = value
     end
 
+    def daemonize?
+      @daemonize.nil? ? true : @daemonize
+    end
+
+    def daemonize=(value)
+      @daemonize = value
+    end
+
     def synchronize
       @synchronize ||= false
     end
@@ -133,7 +150,7 @@ module WebsocketRails
         :tag => 'websocket_rails',
         :rackup => "#{Rails.root}/config.ru",
         :threaded => false,
-        :daemonize => true,
+        :daemonize => daemonize?,
         :dirname => Rails.root,
         :max_persistent_conns => 1024,
         :max_conns => 1024

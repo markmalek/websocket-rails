@@ -22,6 +22,9 @@ WebsocketRails.setup do |config|
   # * Requires Redis.
   config.synchronize = false
 
+  # Prevent Thin from daemonizing (default is true)
+  # config.daemonize = false
+
   # Uncomment and edit to point to a different redis instance.
   # Will not be used unless standalone or synchronization mode
   # is enabled.
@@ -51,5 +54,10 @@ WebsocketRails.setup do |config|
   # synchronization is enabled and you trigger events from background
   # jobs using the WebsocketRails.users UserManager.
   # config.user_class = User
+
+  # Supporting HTTP streaming on Internet Explorer versions 8 & 9
+  # requires CORS to be enabled for GET "/websocket" request.
+  # List here the origin domains allowed to perform the request.
+  # config.allowed_origins = ['http://localhost:3000']
 
 end
