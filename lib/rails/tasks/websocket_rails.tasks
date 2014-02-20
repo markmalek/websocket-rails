@@ -2,6 +2,7 @@ namespace :websocket_rails do
   desc 'Start the WebsocketRails standalone server.'
   task :start_server do
     require "thin"
+
     load "#{Rails.root}/config/initializers/websocket_rails.rb"
     load "#{Rails.root}/config/events.rb"
 
@@ -15,6 +16,10 @@ namespace :websocket_rails do
       end
     else
         Thin::Controllers::Controller.new(options).start
+    end
+
+    if options[:callback]
+        require options[:callback]
     end
 
     puts "Websocket Rails Standalone Server listening on port #{options[:port]}"
