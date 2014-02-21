@@ -19,7 +19,6 @@ namespace :websocket_rails do
     end
 
     if options[:callback]
-        puts "test"
         load options[:callback]
     end
 
