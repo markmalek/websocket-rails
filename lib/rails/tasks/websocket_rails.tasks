@@ -17,10 +17,12 @@ namespace :websocket_rails do
     else
         Thin::Controllers::Controller.new(options).start
     end
-
-    if options[:callback]
+    puts "starting up before callback..."
+    unless options[:callback].nil?
+        puts "in callback"
         load options[:callback]
     end
+    puts "starting up before callback..."
 
     puts "Websocket Rails Standalone Server listening on port #{options[:port]}"
   end
